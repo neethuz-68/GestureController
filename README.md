@@ -2,54 +2,70 @@
   <img src="./img.png" alt="Project Banner" width="100%">
 </p>
 
-# [Project Name] 🎯
+# AirGestures 🎯
 
 ## Basic Details
 
-### Team Name: [Name]
+### Team Name: LadyBug
 
 ### Team Members
-- Member 1: [Name] - [College]
-- Member 2: [Name] - [College]
-
-### Hosted Project Link
-[mention your project hosted link here]
+- Member 1: Devangana U - CET
+- Member 2: V Navaneeta Saraswathy - CET
 
 ### Project Description
-[2-3 lines about what your project does]
+AirGestures is a cross-platform hand gesture control system that allows users to navigate presentations, scroll through documents, and zoom in/out without touching the keyboard or mouse. Using a live webcam feed and real-time hand tracking via MediaPipe, the system detects specific gestures—such as open palm, fist, one finger, or two fingers—and maps them to actions like scroll, zoom, or slide navigation. Users can toggle the feature on/off with a keyboard shortcut, enabling seamless control in PowerPoint, PDF viewers, and web documents, all while running in the background.
 
 ### The Problem statement
-[What problem are you solving?]
+In presentations, meetings, or document navigation, users frequently need to interact with a computer via keyboard or mouse, which can be cumbersome, slow, and disrupt the flow of work. Traditional input methods are not intuitive for hands-free control, and there is no easy way to navigate slides, scroll documents, or zoom in/out without physically touching the device.
 
 ### The Solution
-[How are you solving it?]
-
----
+AirGestures leverages real-time hand tracking via a webcam to recognize simple gestures and map them to computer actions. With gestures like open palm, fist, or one/two fingers, users can scroll, zoom, or navigate slides without touching the keyboard or mouse. The system runs in the background and can be toggled on/off using a keyboard shortcut, providing an intuitive, touch-free, and efficient way to control presentations and documents across multiple platforms.
+Key Advantages:
+Hands-free control for presentations and documents.
+Real-time gesture recognition using MediaPipe.
+Hotkey toggle for quick activation/deactivation.
+Cross-platform support with minimal setup.
 
 ## Technical Details
+Gesture Detection:
+Uses MediaPipe Hands to detect hand landmarks in real-time from a webcam feed.
+Each finger’s position is analyzed to classify gestures like open palm, fist, 1 finger, 2 fingers.
+
+Action Mapping:
+Gestures are mapped to computer actions:
+Open palm → Zoom In
+Fist → Zoom Out
+1 finger → Scroll Up
+2 fingers → Scroll Down
+PowerPoint specific: One additional gesture for Next Slide / Previous Slide.
+
+Real-Time Control:
+Runs a background thread for continuous hand detection.
+Can be toggled on/off with a keyboard shortcut (Ctrl+Shift+G).
+Optional hotkey to quit the application gracefully.
+
+Platform Adaptation:
+Detects the active window to apply slide navigation only when using PowerPoint or other target applications.
+Cross-platform support for Windows, Mac, and Linux with platform-specific APIs.
+
+User Feedback (UI):
+Optional overlay on the webcam feed showing detected gesture in real-time for clarity during demos.
 
 ### Technologies/Components Used
-
-**For Software:**
-- Languages used: [e.g., JavaScript, Python, Java]
-- Frameworks used: [e.g., React, Django, Spring Boot]
-- Libraries used: [e.g., axios, pandas, JUnit]
-- Tools used: [e.g., VS Code, Git, Docker]
-
-**For Hardware:**
-- Main components: [List main components]
-- Specifications: [Technical specifications]
-- Tools required: [List tools needed]
-
+-Languages used: Python 3.10+
+-Frameworks used: None (lightweight, custom Python implementation)
+-Libraries used: OpenCV, MediaPipe, PyAutoGUI, Keyboard, Pillow (PIL)
+-Tools used: VS Code, Git, Python virtual environment, System APIs (win32gui for Windows, AppKit for Mac, subprocess for Linux)
 ---
 
 ## Features
 
 List the key features of your project:
-- Feature 1: [Description]
-- Feature 2: [Description]
-- Feature 3: [Description]
-- Feature 4: [Description]
+- Feature 1: Gesture-based navigation: scroll up/down, zoom in/out.
+- Feature 2: Slide control: next/previous slide in PowerPoint
+- Feature 3: Hotkey toggle for on/off control.
+- Feature 4: Cross-platform support (Windows, macOS, Linux).
+- Feature 5: Real-time feedback with optional on-screen overlay.
 
 ---
 
@@ -58,24 +74,27 @@ List the key features of your project:
 ### For Software:
 
 #### Installation
-```bash
-[Installation commands - e.g., npm install, pip install -r requirements.txt]
-```
+# 1. Clone the repository
+git clone <https://github.com/neethuz-68/GestureController>
+cd GestureController/src
+
+# 2. Create a virtual environment (optional but recommended)
+python -m venv venv
+# Activate the virtual environment
+# Windows
+venv\Scripts\activate
+# Mac/Linux
+source venv/bin/activate
+
+# 3. Manually install if no requirements file
+pip install opencv-python mediapipe pyautogui keyboard
 
 #### Run
-```bash
-[Run commands - e.g., npm start, python app.py]
-```
+# Run the main script in the background
+python main.py
 
-### For Hardware:
-
-#### Components Required
-[List all components needed with specifications]
-
-#### Circuit Setup
-[Explain how to set up the circuit]
-
----
+# Use Ctrl+Shift+G to toggle gesture control ON/OFF
+# Use Ctrl+Shift+Q to quit the program
 
 ## Project Documentation
 
@@ -83,184 +102,49 @@ List the key features of your project:
 
 #### Screenshots (Add at least 3)
 
-![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
+![Screenshot1]https://drive.google.com/file/d/1loBVtg8j2KcFKe3YVF_3yGxTpGtC0WJQ/view?usp=sharing
 
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
+![Screenshot2]https://drive.google.com/file/d/15s7DHWn93J_MxAAaPTTxBvzPdcoDLrFH/view?usp=sharing
 
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
+![Screenshot3]https://drive.google.com/file/d/1Y2O2rmH1estULS7HUh7X30pqw2xCOgiA/view?usp=sharing
 
 #### Diagrams
 
 **System Architecture:**
+The system consists of three main components: Gesture Detection, Action Mapping, and System Control. These components interact to allow users to control software (e.g., PowerPoint, web browsers, PDF viewers) via hand gestures.
+Components & Flow:
+Webcam Input
+Captures live video frames.
+Feeds frames into the Gesture Detection module.
+Gesture Detection (Controller + Mediapipe)
+Uses Mediapipe Hands to detect hand landmarks.
 
-![Architecture Diagram](docs/architecture.png)
-*Explain your system architecture - components, data flow, tech stack interaction*
+Classifies gestures using GestureClassifier:
+Open palm → Zoom in
+Fist → Zoom out
+1 finger → Scroll up
+2 fingers → Scroll down
+3 fingers → next slide
+Index and pinky → previous slide
 
-**Application Workflow:**
+Action Mapping (ActionMapper)
+Checks the active window to determine the context (PowerPoint, browser, etc.).
+Maps gestures to appropriate system actions using pyautogui or keyboard:
+Scroll, zoom, slide navigation.
 
-![Workflow](docs/workflow.png)
-*Add caption explaining your workflow*
+System Control & Hotkeys
+Background Python script listens for hotkeys:
+Ctrl+Shift+G → Toggle gesture detection on/off
+Ensures non-blocking execution so gestures can work alongside other applications.
 
----
+[Webcam] → [GestureController] → [GestureClassifier] → [ActionMapper] → [System / Application]
+                 ↑
+                 │
+        [Hotkey Toggle / Quit]
 
-### For Hardware:
-
-#### Schematic & Circuit
-
-![Circuit](Add your circuit diagram here)
-*Add caption explaining connections*
-
-![Schematic](Add your schematic diagram here)
-*Add caption explaining the schematic*
-
-#### Build Photos
-
-![Team](Add photo of your team here)
-
-![Components](Add photo of your components here)
-*List out all components shown*
-
-![Build](Add photos of build process here)
-*Explain the build steps*
-
-![Final](Add photo of final product here)
-*Explain the final build*
-
----
 
 ## Additional Documentation
 
-### For Web Projects with Backend:
-
-#### API Documentation
-
-**Base URL:** `https://api.yourproject.com`
-
-##### Endpoints
-
-**GET /api/endpoint**
-- **Description:** [What it does]
-- **Parameters:**
-  - `param1` (string): [Description]
-  - `param2` (integer): [Description]
-- **Response:**
-```json
-{
-  "status": "success",
-  "data": {}
-}
-```
-
-**POST /api/endpoint**
-- **Description:** [What it does]
-- **Request Body:**
-```json
-{
-  "field1": "value1",
-  "field2": "value2"
-}
-```
-- **Response:**
-```json
-{
-  "status": "success",
-  "message": "Operation completed"
-}
-```
-
-[Add more endpoints as needed...]
-
----
-
-### For Mobile Apps:
-
-#### App Flow Diagram
-
-![App Flow](docs/app-flow.png)
-*Explain the user flow through your application*
-
-#### Installation Guide
-
-**For Android (APK):**
-1. Download the APK from [Release Link]
-2. Enable "Install from Unknown Sources" in your device settings:
-   - Go to Settings > Security
-   - Enable "Unknown Sources"
-3. Open the downloaded APK file
-4. Follow the installation prompts
-5. Open the app and enjoy!
-
-**For iOS (IPA) - TestFlight:**
-1. Download TestFlight from the App Store
-2. Open this TestFlight link: [Your TestFlight Link]
-3. Click "Install" or "Accept"
-4. Wait for the app to install
-5. Open the app from your home screen
-
-**Building from Source:**
-```bash
-# For Android
-flutter build apk
-# or
-./gradlew assembleDebug
-
-# For iOS
-flutter build ios
-# or
-xcodebuild -workspace App.xcworkspace -scheme App -configuration Debug
-```
-
----
-
-### For Hardware Projects:
-
-#### Bill of Materials (BOM)
-
-| Component | Quantity | Specifications | Price | Link/Source |
-|-----------|----------|----------------|-------|-------------|
-| Arduino Uno | 1 | ATmega328P, 16MHz | ₹450 | [Link] |
-| LED | 5 | Red, 5mm, 20mA | ₹5 each | [Link] |
-| Resistor | 5 | 220Ω, 1/4W | ₹1 each | [Link] |
-| Breadboard | 1 | 830 points | ₹100 | [Link] |
-| Jumper Wires | 20 | Male-to-Male | ₹50 | [Link] |
-| [Add more...] | | | | |
-
-**Total Estimated Cost:** ₹[Amount]
-
-#### Assembly Instructions
-
-**Step 1: Prepare Components**
-1. Gather all components listed in the BOM
-2. Check component specifications
-3. Prepare your workspace
-![Step 1](images/assembly-step1.jpg)
-*Caption: All components laid out*
-
-**Step 2: Build the Power Supply**
-1. Connect the power rails on the breadboard
-2. Connect Arduino 5V to breadboard positive rail
-3. Connect Arduino GND to breadboard negative rail
-![Step 2](images/assembly-step2.jpg)
-*Caption: Power connections completed*
-
-**Step 3: Add Components**
-1. Place LEDs on breadboard
-2. Connect resistors in series with LEDs
-3. Connect LED cathodes to GND
-4. Connect LED anodes to Arduino digital pins (2-6)
-![Step 3](images/assembly-step3.jpg)
-*Caption: LED circuit assembled*
-
-**Step 4: [Continue for all steps...]**
-
-**Final Assembly:**
-![Final Build](images/final-build.jpg)
-*Caption: Completed project ready for testing*
-
----
 
 ### For Scripts/CLI Tools:
 
@@ -268,131 +152,74 @@ xcodebuild -workspace App.xcworkspace -scheme App -configuration Debug
 
 **Basic Usage:**
 ```bash
-python script.py [options] [arguments]
+python main.py
 ```
 
-**Available Commands:**
-- `command1 [args]` - Description of what command1 does
-- `command2 [args]` - Description of what command2 does
-- `command3 [args]` - Description of what command3 does
-
-**Options:**
-- `-h, --help` - Show help message and exit
-- `-v, --verbose` - Enable verbose output
-- `-o, --output FILE` - Specify output file path
-- `-c, --config FILE` - Specify configuration file
-- `--version` - Show version information
+**HotKeys**
+Ctrl+Shift+G (Toggle on/off)
 
 **Examples:**
 
-```bash
-# Example 1: Basic usage
-python script.py input.txt
+# Start the controller
+python main.py
 
-# Example 2: With verbose output
-python script.py -v input.txt
+# Toggle gestures ON
+Press Ctrl+Shift+G
 
-# Example 3: Specify output file
-python script.py -o output.txt input.txt
+# Toggle gestures OFF
+Press Ctrl+Shift+G again
 
-# Example 4: Using configuration
-python script.py -c config.json --verbose input.txt
-```
 
 #### Demo Output
 
 **Example 1: Basic Processing**
 
 **Input:**
-```
-This is a sample input file
-with multiple lines of text
-for demonstration purposes
-```
+```None```
 
 **Command:**
 ```bash
-python script.py sample.txt
+python main.py
 ```
 
 **Output:**
 ```
-Processing: sample.txt
-Lines processed: 3
-Characters counted: 86
-Status: Success
-Output saved to: output.txt
+(venv) PS C:\Users\navan\GestureController\src> python main.py
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+Gesture Controller running in background. Press Ctrl+Shift+G to toggle.
+Gesture ON
+Gesture OFF
 ```
-
-**Example 2: Advanced Usage**
-
-**Input:**
-```json
-{
-  "name": "test",
-  "value": 123
-}
-```
-
-**Command:**
-```bash
-python script.py -v --format json data.json
-```
-
-**Output:**
-```
-[VERBOSE] Loading configuration...
-[VERBOSE] Parsing JSON input...
-[VERBOSE] Processing data...
-{
-  "status": "success",
-  "processed": true,
-  "result": {
-    "name": "test",
-    "value": 123,
-    "timestamp": "2024-02-07T10:30:00"
-  }
-}
-[VERBOSE] Operation completed in 0.23s
-```
-
----
 
 ## Project Demo
 
 ### Video
-[Add your demo video link here - YouTube, Google Drive, etc.]
-
-*Explain what the video demonstrates - key features, user flow, technical highlights*
-
-### Additional Demos
-[Add any extra demo materials/links - Live site, APK download, online demo, etc.]
-
----
+https://drive.google.com/file/d/1JpBirrMMzV4xPBpIQGD0Qct5P4chm-be/view?usp=sharing
 
 ## AI Tools Used (Optional - For Transparency Bonus)
 
-If you used AI tools during development, document them here for transparency:
+**Tool Used:** [ChatGPT]
 
-**Tool Used:** [e.g., GitHub Copilot, v0.dev, Cursor, ChatGPT, Claude]
-
-**Purpose:** [What you used it for]
-- Example: "Generated boilerplate React components"
-- Example: "Debugging assistance for async functions"
-- Example: "Code review and optimization suggestions"
+**Purpose:** Assisted with:
+Planning the project workflow and team responsibilities
+Writing Python boilerplate code for gesture detection and mapping
+Debugging issues with MediaPipe, OpenCV, and keyboard shortcuts
+Suggesting improvements for code structure and repo organization
+Drafting project documentation, problem statements, and technical descriptions
 
 **Key Prompts Used:**
-- "Create a REST API endpoint for user authentication"
-- "Debug this async function that's causing race conditions"
-- "Optimize this database query for better performance"
+- "Create a Python class to classify hand gestures using MediaPipe"
+- "Suggest a clean folder structure for a Python gesture control project"
+- "Generate a project problem statement and technical details for documentation"
 
-**Percentage of AI-generated code:** [Approximately X%]
+**Percentage of AI-generated code:** [Approximately 50%]
 
 **Human Contributions:**
-- Architecture design and planning
-- Custom business logic implementation
-- Integration and testing
-- UI/UX design decisions
+- Designing system architecture and workflow for gesture control
+- Implementing gesture-to-action mapping logic (scroll, zoom, slide navigation)
+- Integrating MediaPipe, OpenCV, pyautogui, and keyboard libraries
+- Testing across platforms and handling live webcam input
+- Version control management and merging contributions between team members
 
 *Note: Proper documentation of AI usage demonstrates transparency and earns bonus points in evaluation!*
 
@@ -400,10 +227,14 @@ If you used AI tools during development, document them here for transparency:
 
 ## Team Contributions
 
-- [Name 1]: [Specific contributions - e.g., Frontend development, API integration, etc.]
-- [Name 2]: [Specific contributions - e.g., Backend development, Database design, etc.]
-- [Name 3]: [Specific contributions - e.g., UI/UX design, Testing, Documentation, etc.]
-
+- [Navaneeta]: [Integrated gesture detection with the webcam using MediaPipe.
+            Developed the GestureController class and main application logic.
+            Implemented the hotkey toggle system for background gesture control.
+            Tested the final system and handled demo execution.]
+- [Devangana]: [Developed the ActionMapper to map gestures to scroll, zoom, and slide actions.
+            Added PowerPoint-specific gestures for next/previous slide.
+            Created gesture classifier logic (GestureClassifier class).
+            Helped with debugging, documentation, and Git collaboration.]
 ---
 
 ## License

@@ -20,6 +20,11 @@ class GestureClassifier:
         # 2 fingers (index + middle)  →  Scroll Down
         if fingers == [0, 1, 1, 0, 0]:
             return "scroll_down"
+        
+        if fingers == [0, 1, 1, 1, 0]:
+            return "next_slide"
+        if fingers == [0, 1, 0, 0, 1]:
+            return "prev_slide"
 
         return "none"
 
