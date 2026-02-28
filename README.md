@@ -54,7 +54,7 @@ Optional overlay on the webcam feed showing detected gesture in real-time for cl
 ### Technologies/Components Used
 -Languages used: Python 3.10+
 -Frameworks used: None (lightweight, custom Python implementation)
--Libraries used: OpenCV, MediaPipe, PyAutoGUI, Keyboard, Pillow (PIL)
+-Libraries used: OpenCV, MediaPipe, PyAutoGUI, Keyboard
 -Tools used: VS Code, Git, Python virtual environment, System APIs (win32gui for Windows, AppKit for Mac, subprocess for Linux)
 ---
 
