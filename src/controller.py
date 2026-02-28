@@ -70,8 +70,7 @@ class GestureController:
                 cv2.putText(frame, gesture, (10, 30),
                             cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
 
-            # Show live webcam
-            cv2.imshow("Hand Gesture Detection", frame)
+            # Show l#cv2.imshow("Hand Gesture Detection", frame)
 
             # Stop if 'q' is pressed
             if cv2.waitKey(1) & 0xFF == ord('q'):
